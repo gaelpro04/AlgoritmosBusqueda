@@ -52,4 +52,12 @@ public class Grafo {
 
         return sb.toString();
     }
+
+    public int size() {
+        return grafo.size();
+    }
+
+    public Nodo getNodoRaiz() {
+        return grafo.getFirst();
+    }
 }

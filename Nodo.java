@@ -26,6 +26,10 @@ public class Nodo {
         this.numero = numero;
     }
 
+    public int sizeVecinos() {
+        return vecinos.size();
+    }
+
     public List<Nodo> getVecinos() {
         return vecinos;
     }
