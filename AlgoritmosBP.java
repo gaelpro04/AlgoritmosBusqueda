@@ -10,7 +10,7 @@ public class AlgoritmosBP {
     public void DFS(Grafo grafo, Nodo nodoObjetivo) {
 
         //Se crean la pila y el arreglo para visitados.
-        Nodo[] visitados = new Nodo[grafo.size()];
+        List<Nodo> visitados = new ArrayList<>();
         Stack<Nodo> pila = new Stack<>();
         int contador = 0;
 
@@ -20,25 +20,30 @@ public class AlgoritmosBP {
         System.out.println("================================Depth-First Search");
         //Mientras que la pila no este vacia seguira ejecutando el ciclo.
         while (!pila.isEmpty()) {
+
+            if (contador == 50) {
+                break;
+            }
+
             System.out.println("===================ITERACION " + contador);
             System.out.println("Pila: " + mostrarPila(pila));
-            System.out.println("Visitados: " + mostrarVisitados(visitados, contador));
+            System.out.println("Visitados: " + mostrarVisitados(visitados));
 
             //Se sada un nodo de la pila para verificar si es el nodo objetivo
             Nodo nodo = pila.pop();
 
             //Si el nodo sacado es igual al nodo objetivo quiere decir que hemos encontrado el nodo en cuestion
             if (nodoObjetivo.getNumero() == nodo.getNumero()) {
-                visitados[contador] = nodo;
+                visitados.add(nodo);
                 System.out.println();
                 System.out.println("Nodo encontrado: " + nodoObjetivo);
                 System.out.println("Pila: " + mostrarPila(pila));
-                System.out.println("Visitados: " + mostrarVisitados(visitados, contador));
+                System.out.println("Visitados: " + mostrarVisitados(visitados));
                 return;
 
                 //Sino se mete el nodo a visitados y se meten sus nodos vecinos a la pila.
             } else {
-                visitados[contador] = nodo;
+                visitados.add(nodo);
                 if (nodo.sizeVecinos() > 0) {
                     nodo.getVecinos().sort(Comparator.comparingInt(Nodo::getNumero));
                     for (Nodo nodoVecino : nodo.getVecinos()) {
@@ -59,7 +64,7 @@ public class AlgoritmosBP {
     public void BFS(Grafo grafo, Nodo nodoObjetivo) {
 
         //Se crea la cola y el arreglo para visitados.
-        Nodo[] visitados = new Nodo[grafo.size()];
+        List<Nodo> visitados = new ArrayList<>();
         Queue<Nodo> cola = new LinkedList<>();
         int contador = 0;
 
@@ -71,26 +76,30 @@ public class AlgoritmosBP {
         while (!cola.isEmpty()) {
             boolean contiene = false;
 
+            if (contador == 50) {
+                break;
+            }
+
             System.out.println("===================ITERACION " + contador);
             System.out.println("Cola: " + mostrarCola(cola));
-            System.out.println("Visitados: " + mostrarVisitados(visitados, contador));
+            System.out.println("Visitados: " + mostrarVisitados(visitados));
 
 
             //Se cada un nodo de la cola para verificar si es el nodo buscado
             Nodo nodo = cola.poll();
             if (nodo.getNumero() == nodoObjetivo.getNumero()) {
-                visitados[contador] = nodo;
+                visitados.add(nodo);
                 System.out.println();
                 System.out.println("Nodo encontrado: " + nodo);
                 System.out.println("Cola: " + mostrarCola(cola));
-                System.out.println("Visitados: " + mostrarVisitados(visitados, contador));
+                System.out.println("Visitados: " + mostrarVisitados(visitados));
 
                 return;
 
                 //Si no lo es, se verifica que el nodo no haya sido descubierto antes
             } else {
-                for (int i = 0; i < contador; i++) {
-                    if (visitados[i].getNumero() == nodo.getNumero()) {
+                for (Nodo nodoVisitado : visitados) {
+                    if (nodoVisitado.getNumero() == nodo.getNumero()) {
                         contiene = true;
                         break;
                     }
@@ -98,7 +107,7 @@ public class AlgoritmosBP {
 
                 //Si el nodo en cuestion no ha sido descubierto se mete a visitados, de lo contrario no lo hace.
                 if (!contiene) {
-                    visitados[contador] = nodo;
+                    visitados.add(nodo);
                 }
 
                 //Se ordenan los nodos vecinos del nodo para poder meterlos a la cola
@@ -128,9 +137,7 @@ public class AlgoritmosBP {
                 }
             }
 
-            if (!contiene) {
-                ++contador;
-            }
+            ++contador;
         }
     }
 
@@ -178,16 +185,13 @@ public class AlgoritmosBP {
         return sb.toString();
     }
 
-    private String mostrarVisitados(Nodo[] visitados, int tamanioActual) {
+    private String mostrarVisitados(List<Nodo> visitados) {
         StringBuilder sb = new StringBuilder();
         sb.append("[ ");
 
-        for (int i = 0; i <= tamanioActual; ++i) {
-            if (visitados[i] != null) {
-                sb.append(visitados[i].getNumero() + " ");
-            }
+        for (Nodo nodo : visitados) {
+            sb.append(nodo.getNumero() + " ");
         }
-
         sb.append("]");
 
         return sb.toString();

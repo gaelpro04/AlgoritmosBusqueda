@@ -16,10 +16,17 @@ public class LecturaGrafo {
             BufferedReader read = new BufferedReader(new FileReader(ruta));
             int contador = 0;
             while ((linea = read.readLine()) != null) {
-                String[] contenido = linea.split(" ");
+                String[] contenido = linea.trim().split("\\s+");
 
                 if (contador == 0) {
-                    for (int i = 1; i < contenido.length; i++) {
+                    int start = 0;
+                    try {
+                        Integer.parseInt(contenido[0]);
+                    } catch (NumberFormatException e) {
+                        start = 1;
+                    }
+
+                    for (int i = start; i < contenido.length; i++) {
                         grafo.agregarNodo(new Nodo(Integer.parseInt(contenido[i])));
                     }
                 } else {
