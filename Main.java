@@ -4,12 +4,12 @@ public class Main {
         System.out.println("\nPrueba lectura archivos");
         LecturaGrafo lg = new LecturaGrafo();
 
-        Grafo grafo = lg.lecturaGrafo("C:\\Users\\sgsg_\\IdeaProjects\\AlgoritmosBusqueda\\prueba1");
+        Grafo grafo = lg.lecturaGrafo("C:\\Users\\sgsg_\\IdeaProjects\\AlgoritmosBusqueda\\prueba2");
 
         System.out.println(grafo);
 
         AlgoritmosBP algo = new AlgoritmosBP();
-        algo.BFS(grafo,new Nodo(8));
+        algo.DFS(grafo,new Nodo(5));
 
     }
 }

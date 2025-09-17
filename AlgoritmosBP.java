@@ -57,7 +57,7 @@ public class AlgoritmosBP {
     }
 
     /**
-     * Algoritmo de busqueda Breath-First Serach
+     * Algoritmo de busqueda Breadth-First Serach
      * @param grafo
      * @param nodoObjetivo
      */
