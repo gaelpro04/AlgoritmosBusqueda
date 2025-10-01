@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/AlgoritmosBusqueda.iml" filepath="$PROJECT_DIR$/.idea/AlgoritmosBusqueda.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DFSyBFS/DFSyBFS.iml" filepath="$PROJECT_DIR$/DFSyBFS/DFSyBFS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UCSyGBFS/UCSyGBFS.iml" filepath="$PROJECT_DIR$/UCSyGBFS/UCSyGBFS.iml" />
     </modules>
   </component>
 </project>

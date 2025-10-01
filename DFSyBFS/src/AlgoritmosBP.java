@@ -20,10 +20,10 @@ public class AlgoritmosBP {
         System.out.println("================================Depth-First Search");
         //Mientras que la pila no este vacia seguira ejecutando el ciclo.
         while (!pila.isEmpty()) {
-
-            if (contador == 50) {
-                break;
-            }
+//
+//            if (contador == 50) {
+//                break;
+//            }
 
             System.out.println("===================ITERACION " + contador);
             System.out.println("Pila: " + mostrarPila(pila));
@@ -63,81 +63,58 @@ public class AlgoritmosBP {
      */
     public void BFS(Grafo grafo, Nodo nodoObjetivo) {
 
-        //Se crea la cola y el arreglo para visitados.
         List<Nodo> visitados = new ArrayList<>();
         Queue<Nodo> cola = new LinkedList<>();
-        int contador = 0;
 
-        //Se mete el nodo raiz a la cola
+        //Agregar nodo raiz a la pila
         cola.offer(grafo.getNodoRaiz());
 
-        System.out.println("================================Breath-First Search");
-        //El ciclo se seguira ejecutando mientras la cola no este vacia
+        System.out.println("================================Breadth-First Search");
+
+        int contador = 0;
         while (!cola.isEmpty()) {
-            boolean contiene = false;
-
-            if (contador == 50) {
-                break;
-            }
-
             System.out.println("===================ITERACION " + contador);
             System.out.println("Cola: " + mostrarCola(cola));
             System.out.println("Visitados: " + mostrarVisitados(visitados));
 
-
-            //Se cada un nodo de la cola para verificar si es el nodo buscado
             Nodo nodo = cola.poll();
+
+            if (visitados.contains(nodo)) {
+                ++contador;
+                continue;
+            }
+
+            visitados.add(nodo);
+
             if (nodo.getNumero() == nodoObjetivo.getNumero()) {
-                visitados.add(nodo);
-                System.out.println();
                 System.out.println("Nodo encontrado: " + nodo);
                 System.out.println("Cola: " + mostrarCola(cola));
                 System.out.println("Visitados: " + mostrarVisitados(visitados));
-
                 return;
+            }
 
-                //Si no lo es, se verifica que el nodo no haya sido descubierto antes
-            } else {
-                for (Nodo nodoVisitado : visitados) {
-                    if (nodoVisitado.getNumero() == nodo.getNumero()) {
-                        contiene = true;
-                        break;
-                    }
-                }
+            nodo.getVecinos().sort(Comparator.comparingInt(Nodo::getNumero));
 
-                //Si el nodo en cuestion no ha sido descubierto se mete a visitados, de lo contrario no lo hace.
-                if (!contiene) {
-                    visitados.add(nodo);
-                }
-
-                //Se ordenan los nodos vecinos del nodo para poder meterlos a la cola
-                nodo.getVecinos().sort(Comparator.comparingInt(Nodo::getNumero));
-
-                //Se meten los nodos vecinos a la cola
-                for (Nodo nodoVecinos : nodo.getVecinos()) {
-                    boolean visitado = false;
-
-                    Queue<Nodo> colaTemp = new LinkedList<>();
-                    while (!cola.isEmpty()) {
-                        Nodo nodo1 = cola.poll();
-                        if (nodoVecinos.getNumero() == nodo1.getNumero()) {
-                            visitado = true;
-                        }
-
-                        colaTemp.offer(nodo1);
-                    }
-
-                    while (!colaTemp.isEmpty()) {
-                        cola.offer(colaTemp.poll());
-                    }
-
-                    if (!visitado) {
-                        cola.offer(nodoVecinos);
-                    }
+            for (Nodo vecino : nodo.getVecinos()) {
+                if (!visitados.contains(vecino) && !cola.contains(vecino)) {
+                    cola.offer(vecino);
                 }
             }
 
             ++contador;
+        }
+    }
+
+
+
+    public void UCS(Grafo grafo, Nodo nodoObjetivo) {
+        Queue<Nodo> colaPrioridad = new LinkedList<>();
+        List<Nodo> visitados = new ArrayList<>();
+
+        colaPrioridad.offer(grafo.getNodoRaiz());
+
+        while (!colaPrioridad.isEmpty()) {
+
         }
     }
 
