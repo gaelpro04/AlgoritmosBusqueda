@@ -28,5 +28,12 @@ public class Arista {
         this.valor = valor;
     }
 
+    public NodoPonderado getNodoPonderadoDestino() {
+        return nodoPonderadoDestino;
+    }
+
+    public void setNodoPonderadoDestino(NodoPonderado nodoPonderadoDestino) {
+        this.nodoPonderadoDestino = nodoPonderadoDestino;
+    }
 }
 

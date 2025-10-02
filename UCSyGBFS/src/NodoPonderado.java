@@ -4,20 +4,36 @@ import java.util.List;
 public class NodoPonderado {
     private String id;
     private List<Arista> vecinos;
+    private int heuristica;
 
     public NodoPonderado() {
         id = null;
         vecinos = new ArrayList<>();
+        heuristica = -1;
     }
 
     public NodoPonderado(String id, List<Arista> vecinos) {
         this.id = id;
         this.vecinos = vecinos;
+        heuristica = -1;
+    }
+
+    public NodoPonderado(String id, int heuristica) {
+        this.id = id;
+        vecinos = new ArrayList<>();
+        this.heuristica = heuristica;
     }
 
     public NodoPonderado(String id) {
         this.id = id;
         vecinos = new ArrayList<>();
+        heuristica = -1;
+    }
+
+    public NodoPonderado(String id, List<Arista> vecinos, int heuristica) {
+        this.id = id;
+        this.vecinos = vecinos;
+        this.heuristica = heuristica;
     }
 
     public String getId() {
@@ -40,6 +56,14 @@ public class NodoPonderado {
         vecinos.add(new Arista(nodoPonderado, valor));
     }
 
+    public int getHeuristica() {
+        return heuristica;
+    }
+
+    public void setHeuristica(int heuristica) {
+        this.heuristica = heuristica;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -51,9 +75,9 @@ public class NodoPonderado {
             int costo = arista.getValor();
 
             if (contador == vecinos.size() - 1) {
-                sb.append("[" + vecino.getId() + "|" + costo + "]");
+                sb.append("[" + vecino.getId() + "|" + vecino.getHeuristica() + "]");
             } else {
-                sb.append("[" + vecino.getId() + "|" + costo + "] -> ");
+                sb.append("[" + vecino.getId() + "|" + vecino.getHeuristica() + "] " + costo + "-> ");
                 ++contador;
             }
         }

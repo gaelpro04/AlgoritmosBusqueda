@@ -105,19 +105,6 @@ public class AlgoritmosBP {
         }
     }
 
-
-
-    public void UCS(Grafo grafo, Nodo nodoObjetivo) {
-        Queue<Nodo> colaPrioridad = new LinkedList<>();
-        List<Nodo> visitados = new ArrayList<>();
-
-        colaPrioridad.offer(grafo.getNodoRaiz());
-
-        while (!colaPrioridad.isEmpty()) {
-
-        }
-    }
-
     private String mostrarCola(Queue<Nodo> cola) {
         StringBuilder sb = new StringBuilder();
         sb.append("[ ");
